@@ -1,0 +1,22 @@
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /srv/nginx/conf:/etc/nginx/conf.d
+      - /srv/nginx/logs:/var/log/nginx
+      - /srv/nginx/www:/var/www/certbot
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /home/lucas/PortfolioCV/dist:/usr/share/nginx/html:ro
+      - /srv/nginx/auth:/etc/nginx/auth:ro
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

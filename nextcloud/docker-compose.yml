@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: nextcloud-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - internal
+
+  nextcloud:
+    image: nextcloud:33.0.0-apache
+    container_name: nextcloud
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: db
+    depends_on:
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+    networks:
+      - web
+      - internal
+
+volumes:
+  db_data:
+  nextcloud:
+
+networks:
+  internal:
+    driver: bridge
+  web:
+    external: true

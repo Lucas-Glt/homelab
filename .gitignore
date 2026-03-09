@@ -1,0 +1,12 @@
+**/.env
+**/*.env
+**/letsencrypt/
+**/ssl/
+**/.htpasswd
+**/secrets/
+jitsi/
+**/logs/
+*.db
+*.db-shm
+*.db-wal
+

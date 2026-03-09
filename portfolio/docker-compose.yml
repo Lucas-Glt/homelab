@@ -1,0 +1,15 @@
+services:
+  portfolio:
+    image: nginx:stable-alpine
+    container_name: portfolio
+    restart: unless-stopped
+    volumes:
+      - /home/lucas/PortfolioCV/dist:/usr/share/nginx/html:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /etc/letsencrypt/archive:/etc/letsencrypt/archive:ro
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
