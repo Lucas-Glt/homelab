@@ -5,10 +5,5 @@ services:
       restart: unless-stopped
       volumes:
         - /srv/uptime-kuma:/app/data
-      networks:
-        - web
-
-networks:
-  web:
-    external: true
-
+      ports:
+        - "127.0.0.1:3001:3001"

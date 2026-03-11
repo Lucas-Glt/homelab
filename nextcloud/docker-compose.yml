@@ -27,8 +27,9 @@ services:
     volumes:
       - nextcloud:/var/www/html
     networks:
-      - web
       - internal
+    ports:
+      - "127.0.0.1:8080:80"
 
 volumes:
   db_data:
@@ -37,5 +38,3 @@ volumes:
 networks:
   internal:
     driver: bridge
-  web:
-    external: true

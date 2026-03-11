@@ -19,16 +19,12 @@ services:
       - /sys:/host/sys:ro
       - /etc/hostname:/etc/hostname:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - web
     group_add:
       - "989"
+    ports:
+      - "127.0.0.1:19999:19999"
 
 volumes:
   netdataconfig:
   netdatalib:
   netdatacache:
-
-networks:
-  web:
-    external: true
